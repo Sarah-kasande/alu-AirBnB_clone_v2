@@ -1,13 +1,23 @@
 #!/usr/bin/python3
-"""Let's start"""
+"""
+Deletes out-of-date archives
+fab -f 100-clean_web_static.py do_clean:number=2
+    -i ssh-key -u ubuntu > /dev/null 2>&1
+"""
+
 import os
 from fabric.api import *
 
-env.hosts = ["54.175.253.142", "34.239.255.28"]
+env.hosts = ['34.227.11.202', '52.90.153.53']
 
 
 def do_clean(number=0):
-    """delete out-of-dated archives
+    """Delete out-of-date archives.
+    Args:
+        number (int): The number of archives to keep.
+    If number is 0 or 1, keeps only the most recent archive. If
+    number is 2, keeps the most and second-most recent archives,
+    etc.
     """
     number = 1 if int(number) == 0 else int(number)
 
